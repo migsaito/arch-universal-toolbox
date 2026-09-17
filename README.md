@@ -1,1 +1,101 @@
-# arch-universal-toolbox
+# Arch Universal Toolbox 🐧
+
+A beautiful and intuitive GUI application for Arch Linux package management. Install/uninstall AUR helpers (paru, yay) and manage pacman mirrors with ease!
+
+## Features ✨
+
+- **Multi-language Support**: English (US) and Português (BR)
+- **AUR Helper Management**: Install/uninstall paru and yay with one click
+- **Pacman Mirrors Management**: View and manage pacman mirrors
+- **Clean & Modern UI**: Built with PyQt5 for a professional look
+- **Cross-platform Ready**: Runs on any system with Python and PyQt5
+
+## Installation
+
+### Prerequisites
+
+- Python 3.8+
+- PyQt5
+
+### Setup
+
+1. Clone the repository:
+```bash
+git clone https://github.com/migsaito/arch-universal-toolbox.git
+cd arch-universal-toolbox
+```
+
+2. Install dependencies:
+```bash
+pip install -r requirements.txt
+```
+
+3. Run the application:
+```bash
+python run.py
+```
+
+Or if installed via setup.py:
+```bash
+arch-toolbox
+```
+
+## Development
+
+### Project Structure
+
+```
+arch-universal-toolbox/
+├── src/
+│   ├── main.py              # Main application entry point
+│   ├── i18n.py              # Internationalization (i18n) manager
+│   ├── system.py            # System package manager wrapper
+│   ├── locales/             # Translation files (JSON)
+│   │   ├── en_US.json
+│   │   └── pt_BR.json
+│   └── ui/
+│       ├── main_window.py   # Main window UI
+│       └── tabs/
+│           ├── aur_helpers.py   # AUR helpers tab
+│           ├── mirrors.py       # Mirrors management tab
+│           └── about.py         # About tab
+├── requirements.txt         # Python dependencies
+├── setup.py                # Setup configuration
+└── run.py                  # Quick run script
+```
+
+### Adding New Languages
+
+1. Create a new JSON file in `src/locales/` (e.g., `es_ES.json`)
+2. Copy the structure from `en_US.json` and translate all strings
+3. Update the language selector in `src/ui/main_window.py`
+
+### Building
+
+```bash
+python setup.py build
+```
+
+## Usage
+
+### Install an AUR Helper
+
+1. Open the application
+2. Go to the "AUR Helpers" tab
+3. Click the "Install" button next to your preferred helper (Paru or Yay)
+4. Confirm the action in the dialog
+
+### Manage Mirrors
+
+1. Go to the "Mirrors" tab
+2. Click "Add Mirror" to add a new mirror
+3. Click "Remove Mirror" to remove a selected mirror
+4. Click "Refresh" to reload the mirrors list
+
+## License
+
+MIT License - feel free to use and modify!
+
+## Contributing
+
+Pull requests are welcome! Feel free to submit issues and enhancements.
