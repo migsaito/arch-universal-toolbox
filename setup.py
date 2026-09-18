@@ -6,6 +6,7 @@ setup(
     description="Universal GUI toolbox for Arch Linux package management",
     author="Mig Saito",
     packages=find_packages(),
+    package_data={"src": ["locales/*.json"]},
     install_requires=[
         "PyQt5>=5.15.0",
     ],

@@ -1,0 +1,9 @@
+[Desktop Entry]
+Type=Application
+Name=Arch Universal Toolbox
+Comment=Manage Arch Linux packages, AUR helpers and mirrors
+Exec=arch-universal-toolbox
+Icon=arch-universal-toolbox
+Terminal=false
+Categories=System;PackageManager;Settings;
+Keywords=Arch;pacman;AUR;paru;yay;mirrors;
