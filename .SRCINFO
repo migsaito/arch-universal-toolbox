@@ -1,0 +1,14 @@
+pkgbase = arch-universal-toolbox
+	pkgdesc = Graphical toolbox for Arch Linux package and mirror management
+	pkgver = 0.1.0
+	pkgrel = 1
+	url = https://github.com/migsaito/arch-universal-toolbox
+	arch = any
+	license = MIT
+	depends = python
+	depends = python-pyqt5
+	depends = pacman
+	source = arch-universal-toolbox-0.1.0.tar.gz::https://github.com/migsaito/arch-universal-toolbox/archive/refs/tags/v0.1.0.tar.gz
+	sha256sums = SKIP
+
+pkgname = arch-universal-toolbox

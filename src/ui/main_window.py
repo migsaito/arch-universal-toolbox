@@ -6,6 +6,7 @@ from PyQt5.QtCore import Qt
 from PyQt5.QtGui import QIcon, QFont
 
 from src.i18n import t, set_language
+from src.config import load_settings, save_settings
 from src.ui.tabs.aur_helpers import AURHelpersTab
 from src.ui.tabs.mirrors import MirrorsTab
 from src.ui.tabs.about import AboutTab
@@ -31,16 +32,19 @@ class MainWindow(QMainWindow):
         
         # Top bar with language selector
         top_layout = QHBoxLayout()
-        lang_label = QLabel(t("lang_select") + ":")
-        lang_label.setFont(QFont("Arial", 10))
+        self.lang_label = QLabel(t("lang_select") + ":")
+        self.lang_label.setFont(QFont("Arial", 10))
         
-        lang_combo = QComboBox()
-        lang_combo.addItems(["English (US)", "Português (BR)"])
-        lang_combo.currentTextChanged.connect(self.on_language_changed)
+        self.lang_combo = QComboBox()
+        self.lang_combo.addItems(["English (US)", "Português (BR)"])
+        self.lang_combo.setCurrentIndex(
+            1 if load_settings().get("language") == "pt_BR" else 0
+        )
+        self.lang_combo.currentTextChanged.connect(self.on_language_changed)
         
         top_layout.addStretch()
-        top_layout.addWidget(lang_label)
-        top_layout.addWidget(lang_combo)
+        top_layout.addWidget(self.lang_label)
+        top_layout.addWidget(self.lang_combo)
         top_layout.setContentsMargins(10, 10, 10, 10)
         
         # Tabs
@@ -59,8 +63,10 @@ class MainWindow(QMainWindow):
         """Handle language change"""
         if "Português" in text:
             set_language("pt_BR")
+            save_settings({"language": "pt_BR"})
         else:
             set_language("en_US")
+            save_settings({"language": "en_US"})
         
         # Refresh UI
         self.refresh_ui()
