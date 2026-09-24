@@ -21,7 +21,7 @@ A beautiful and intuitive GUI application for Arch Linux package management. Ins
 - Python 3.8+
 - PyQt5
 
-### Setup
+### Running from source
 
 1. Clone the repository:
 ```bash
@@ -44,6 +44,41 @@ Or if installed via setup.py:
 arch-toolbox
 ```
 
+### Installing the Arch package
+
+The repository includes a `PKGBUILD` for building a native Arch package. It
+installs the application launcher, desktop entry, icon and locale files into
+the standard system directories.
+
+On an Arch Linux system, install the packaging tools and build the package:
+
+```bash
+sudo pacman -S --needed base-devel git
+git clone https://github.com/migsaito/arch-universal-toolbox.git
+cd arch-universal-toolbox
+makepkg -si
+```
+
+After installation, launch **Arch Universal Toolbox** from the desktop menu or
+run:
+
+```bash
+arch-universal-toolbox
+```
+
+The `PKGBUILD` currently builds from the GitHub tag `v0.1.0`. When preparing a
+new release, update `pkgver`, create the matching tag, regenerate `.SRCINFO`
+and refresh the source checksum:
+
+```bash
+updpkgsums
+makepkg --printsrcinfo > .SRCINFO
+makepkg -si
+```
+
+Before publishing the recipe to the AUR, review the generated `.SRCINFO` and
+replace any temporary `SKIP` checksum with the real SHA-256 value.
+
 ## Development
 
 ### Project Structure
@@ -65,13 +100,14 @@ arch-universal-toolbox/
 │           ├── stores.py        # Pacman and AUR stores
 │           └── about.py         # About tab
 │       └── package_card.py      # Reusable package result card
-├── tests/                       # Unit tests
-├── requirements.txt         # Python dependencies
-├── setup.py                # Setup configuration
-├── PKGBUILD                 # Arch/AUR package recipe
-├── packaging/               # Desktop entry and application icon
-├── tests/                   # Unit tests
-└── run.py                   # Quick run script
+├── tests/                    # Unit tests
+├── requirements.txt          # Runtime dependencies
+├── requirements-dev.txt      # Development and test dependencies
+├── setup.py                  # Python package configuration
+├── PKGBUILD                  # Arch/AUR package recipe
+├── .SRCINFO                  # AUR metadata
+├── packaging/                # Desktop entry and application icon
+└── run.py                    # Quick run script
 ```
 
 ### Adding New Languages
