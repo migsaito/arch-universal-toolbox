@@ -7,6 +7,9 @@ A beautiful and intuitive GUI application for Arch Linux package management. Ins
 - **Multi-language Support**: English (US) and Português (BR)
 - **AUR Helper Management**: Install/uninstall paru and yay with one click
 - **Pacman Mirrors Management**: View and manage pacman mirrors
+- **Official Package Store**: Search enabled pacman repositories
+- **AUR Store**: Search packages published in the Arch User Repository
+- **Package Cards**: Show package name, version, repository, description and icon
 - **Clean & Modern UI**: Built with PyQt5 for a professional look
 - **Persistent Preferences**: Saves the selected language in the user's config directory
 - **AUR Packaging**: Includes a ready-to-review `PKGBUILD` and desktop launcher
@@ -59,7 +62,10 @@ arch-universal-toolbox/
 │       └── tabs/
 │           ├── aur_helpers.py   # AUR helpers tab
 │           ├── mirrors.py       # Mirrors management tab
+│           ├── stores.py        # Pacman and AUR stores
 │           └── about.py         # About tab
+│       └── package_card.py      # Reusable package result card
+├── tests/                       # Unit tests
 ├── requirements.txt         # Python dependencies
 ├── setup.py                # Setup configuration
 ├── PKGBUILD                 # Arch/AUR package recipe
@@ -114,6 +120,17 @@ python -m pytest
 2. Click "Add Mirror" to add a new mirror
 3. Click "Remove Mirror" to remove a selected mirror
 4. Click "Refresh" to reload the mirrors list
+
+### Install from a store
+
+1. Open **Pacman Store** or **AUR Store**
+2. Search for a package name
+3. Review its repository, version and description
+4. Click **Install** and confirm the operation
+
+Official packages use `sudo pacman`; AUR packages use `paru` when available,
+or `yay` as a fallback. The command runs in a background worker so the GUI
+remains responsive.
 
 ## License
 

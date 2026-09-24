@@ -48,6 +48,34 @@ class PackageManager:
                 return False, result.stderr
         except Exception as e:
             return False, str(e)
+
+    @staticmethod
+    def install_package(package: str, source: str = "official") -> Tuple[bool, str]:
+        """Install a package from pacman or an installed AUR helper."""
+        if not PACKAGE_NAME.fullmatch(package):
+            return False, "Invalid package name"
+
+        command = ["sudo", "pacman", "-S", "--needed", package]
+        if source == "aur":
+            helper = "paru" if shutil.which("paru") else "yay"
+            if not shutil.which(helper):
+                return False, "Install paru or yay before installing AUR packages"
+            command = [helper, "-S", "--needed", package]
+        elif source != "official":
+            return False, "Invalid package source"
+
+        try:
+            result = subprocess.run(
+                command,
+                capture_output=True,
+                text=True,
+                timeout=300,
+            )
+        except (OSError, subprocess.TimeoutExpired) as error:
+            return False, str(error)
+        if result.returncode == 0:
+            return True, f"{package} installed successfully"
+        return False, result.stderr.strip() or "Package installation failed"
     
     @staticmethod
     def uninstall_package(package: str) -> Tuple[bool, str]:

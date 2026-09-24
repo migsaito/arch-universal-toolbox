@@ -10,6 +10,7 @@ from src.config import load_settings, save_settings
 from src.ui.tabs.aur_helpers import AURHelpersTab
 from src.ui.tabs.mirrors import MirrorsTab
 from src.ui.tabs.about import AboutTab
+from src.ui.tabs.stores import PackageStoreTab
 
 
 class MainWindow(QMainWindow):
@@ -52,6 +53,8 @@ class MainWindow(QMainWindow):
         tabs.addTab(AURHelpersTab(), t("aur_helpers"))
         tabs.addTab(MirrorsTab(), t("mirrors"))
         tabs.addTab(AboutTab(), t("about"))
+        tabs.addTab(PackageStoreTab("official"), "Pacman Store")
+        tabs.addTab(PackageStoreTab("aur"), "AUR Store")
         
         # Add to main layout
         main_layout.addLayout(top_layout)

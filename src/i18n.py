@@ -13,14 +13,17 @@ class I18n:
     def load_language(self, lang: str):
         """Load translations from JSON file"""
         self.lang = lang
-        lang_file = Path(__file__).parent / "locales" / f"{lang}.json"
+        local_dir = Path(__file__).parent / "locales"
+        system_dir = Path("/usr/share/arch-universal-toolbox/locales")
+        locale_dir = system_dir if system_dir.exists() else local_dir
+        lang_file = locale_dir / f"{lang}.json"
         
         if lang_file.exists():
             with open(lang_file, "r", encoding="utf-8") as f:
                 self.translations = json.load(f)
         else:
             # Fallback to English
-            en_file = Path(__file__).parent / "locales" / "en_US.json"
+            en_file = locale_dir / "en_US.json"
             with open(en_file, "r", encoding="utf-8") as f:
                 self.translations = json.load(f)
     
